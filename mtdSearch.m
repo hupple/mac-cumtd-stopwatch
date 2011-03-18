@@ -18,9 +18,17 @@
 - (void)awakeFromNib {
     [searchField setTarget:self];
     [searchResults setDoubleAction:@selector(doubleClick:)];
-    [searchField setStringValue:@"MTD7411"];
-    [self stopWatchwithString:@"MTD7411"];
+    NSString *search = @"MTD7411";
+    [self updateRecentSearch:search];
+    [searchField setStringValue:search];
+    [self stopWatchwithString:search];
     
+}
+-(void)updateRecentSearch:(NSString*)input{
+	NSMutableArray* newrecent = [NSMutableArray arrayWithArray:[searchField recentSearches]];
+	[newrecent removeObject:input];
+	[newrecent insertObject:input atIndex:0];
+	[searchField setRecentSearches:newrecent];
 }
 
 -(IBAction)stopWatch:(id)sender{
@@ -132,12 +140,7 @@
 	MTDrange.length += 4;	//range for MTDnnnn
 	NSString *input = [rowString substringWithRange:MTDrange];
 	[searchField setStringValue:input];
-	NSArray* recent = [searchField recentSearches];
-	NSMutableArray* newrecent = [NSMutableArray arrayWithArray:recent];
-	[newrecent removeObject:input];
-	[newrecent insertObject:input atIndex:0];
-	[searchField setRecentSearches:newrecent];
-    //[recent release];
+    [self updateRecentSearch:input];
 	[self stopWatchwithString:input];
 }
 #pragma mark -

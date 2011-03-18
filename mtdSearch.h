@@ -19,5 +19,5 @@
 }
 -(IBAction)stopWatch:(id)sender;
 -(void)stopWatchwithString:(NSString*)sstring;
-
+-(void)updateRecentSearch:(NSString*)sstring;
 @end

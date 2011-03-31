@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface mtdSearch : NSObject {
 	IBOutlet NSTextField *resultTitle;
 		//IBOutlet NSProgressIndicator *progess;
